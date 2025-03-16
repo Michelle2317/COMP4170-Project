@@ -1,6 +1,7 @@
 import express from 'express';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import pg from 'pg';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 console.log(__dirname);
@@ -8,6 +9,15 @@ console.log(__dirname);
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
+
+const db = new pg.Client({
+	user: 'project_user',
+	host: 'localhost',
+	database: 'diary',
+	password: 'deardiary',
+	port: 5432,
+});
+db.connect();
 
 app.set('view engine', 'ejs');
 
@@ -17,7 +27,11 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
 	let username = req.body['username_name'];
-	res.render('dashboard', { title: 'Dashboard', username });
+	let email = req.body['email_name'];
+	const query = 'INSERT INTO users (username, email) VALUES ($1, $2)';
+	db.query(query, [username, email], (err, result) => {
+		res.render('dashboard', { title: 'Dashboard', username });
+	});
 });
 
 app.get('/dashboard', (req, res) => {
