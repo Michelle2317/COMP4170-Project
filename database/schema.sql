@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE
-);
-
-CREATE USER project_user WITH PASSWORD 'deardiary';
-GRANT ALL PRIVILEGES ON DATABASE diary TO project_user;

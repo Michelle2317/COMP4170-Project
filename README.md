@@ -5,9 +5,14 @@ This is a diary web application that allows users to create, update, view, and d
 
 ## Team Members and Tasks
 - Michelle Ao
-  - Task
+  - README Documentation
+  - Database Management
+  - Backend Development
+  - Diary Functionality
+  
 - Julia Deng
   - Task
+  
 - Andrew Turitsa
   - Task
 
@@ -15,7 +20,6 @@ This is a diary web application that allows users to create, update, view, and d
 1. Download the folder or git clone the repo to your machine.
 ```
 git clone https://github.com/Michelle2317/COMP4170-Project.git
-
 ```
 2. Install dependencies.
 ```
@@ -24,23 +28,36 @@ npm install
 
 3. Set up PostgreSQL.
 - Install [PostgreSQL](https://www.postgresql.org/download/).
-- Create the database by running the following SQL command in pgAdmin. Or using the interface, right-click on the databases folder and then create < database.
+- After installing, run pgAdmin 4.
+  
+4. First, create the user by running the following SQL command using the Query Tool Workspace. Click execute and then restart pgAdmin 4. 
+```
+CREATE USER project_user WITH PASSWORD 'deardiary';
+GRANT ALL PRIVILEGES ON DATABASE diary TO project_user;
+```
+
+5. Next, create the database by running the following SQL command using the Query Tool Workspace or in the Object Explorer tab, right-click on the databases folder and then create < database.
 ```
 CREATE DATABASE diary;
 ```
 
-4. After connecting to database, set up the Database Tables using the schema.sql file.
-- In the Query Tool, click on the Open File icon and select the schema.sql file.
-- Click on the Execute button to run the schema.sql file.
-  
-5. Start the app or run with nodemon.
+6. After connecting to database, create the database tables by running the following SQL command using the Query Tool Workspace. Click execute and go back to the Object Explorer tab. Open up the tabs inside the Servers until you find Tables under Schemas, right-click, refresh to see created tables.
+```
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+```
+
+7. Start the app or run with nodemon.
 ```
 node index.js
 # or if using nodemon:
 nodemon index.js
 ``` 
 
-6. Visit the app in your browser.
+8. Visit the app in your browser.
 ```
 http://localhost:3000
 ```
