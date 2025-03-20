@@ -53,7 +53,7 @@ CREATE DATABASE diary;
 GRANT ALL PRIVILEGES ON DATABASE diary TO project_user;
 ```
 
-7. Open the Query Tool Workspace to connect to the database "diary" with the user "project_user", then create the database tables by running the following SQL command. Click execute and go back to the Object Explorer tab. Open up the tabs inside the Servers until you find Tables under Schemas, right-click, refresh to see created tables.
+7. Open the Query Tool Workspace to connect to the database "diary" with the user "project_user" and password "deardiary". Then create the database tables by running the following SQL command. Click execute and go back to the Object Explorer tab. Open up the tabs inside the Servers until you find Tables under Schemas, right-click, refresh to see created tables.
 
 ```
 CREATE TABLE users (
