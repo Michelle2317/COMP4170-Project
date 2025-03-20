@@ -1,4 +1,15 @@
 <%- include('../partials/header') %>
 <body>
-
+	<h2>Write New Entry</h2>
+	<form action="/add" method="POST">
+		<div>
+			<label class="title">Title</label>
+			<input type="text" name="entry_title" required />
+		</div>
+		<div>
+			<label class="content">Content</label>
+			<textarea name="entry_content" rows="5" required></textarea>
+		</div>
+		<button type="submit" class="buttons">Submit Entry</button>
+	</form>
 </body>
