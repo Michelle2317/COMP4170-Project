@@ -47,7 +47,7 @@ CREATE USER project_user WITH PASSWORD 'deardiary';
 CREATE DATABASE diary;
 ```
 
-6. Once the database "diary" is created. Running the following SQL command using the Query Tool Workspace.
+6. Once the database "diary" is created. Run the following SQL command using the Query Tool Workspace.
 
 ```
 GRANT ALL PRIVILEGES ON DATABASE diary TO project_user;
