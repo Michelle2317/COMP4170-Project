@@ -35,25 +35,13 @@ npm install
 -   Install [PostgreSQL](https://www.postgresql.org/download/).
 -   After installing, run pgAdmin 4.
 
-4. First, create the user by running the following SQL command using the Query Tool Workspace. Click execute and then restart pgAdmin 4.
-
-```
-CREATE USER project_user WITH PASSWORD 'deardiary';
-```
-
-5. Next, create the database by running the following SQL command using the Query Tool Workspace or in the Object Explorer tab, right-click on the databases folder and then create < database.
+4. Open pgAdmin 4 and create the database by running the following SQL command using the Query Tool Workspace or in the Object Explorer tab, right-click on the databases folder and then create < database.
 
 ```
 CREATE DATABASE diary;
 ```
 
-6. Once the database "diary" is created. Run the following SQL command using the Query Tool Workspace.
-
-```
-GRANT ALL PRIVILEGES ON DATABASE diary TO project_user;
-```
-
-7. Open the Query Tool Workspace to connect to the database "diary" with the user "project_user" and password "deardiary". Then create the database tables by running the following SQL command. Click execute and go back to the Object Explorer tab. Open up the tabs inside the Servers until you find Tables under Schemas, right-click, refresh to see created tables.
+5. Once the database "diary" is created. Reopen and reset the Query Tool Workspace to connect to the database "diary" with the user "postgres" and your user password. Then create the database tables by running the following SQL command.
 
 ```
 CREATE TABLE users (
@@ -62,6 +50,10 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE
 );
 ```
+
+6. Click execute and go back to the Object Explorer tab. Open up the tabs in the Servers to find the database diary. Inside the database diary, open tabs until you find Tables under Schemas, right-click, refresh to see created tables.
+
+7. Go into the project folder. Inside the index.js file, change the password value in const db, to be the password you chose for your pgAdmin 4 user.
 
 8. Start the app or run with nodemon.
 
