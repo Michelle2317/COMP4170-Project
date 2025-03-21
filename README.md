@@ -12,7 +12,8 @@ This is a diary web application that allows users to create, update, view, and d
     -   Backend Development
     -   Diary Functionality
 -   Julia Deng
-    -   Task
+    -   Edit README Documentation
+    -   Add Authentication for user
 -   Andrew Turitsa
     -   Task
 
@@ -46,8 +47,8 @@ CREATE DATABASE diary;
 ```
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE
+    username TEXT NOT NULL UNIQUE,
+    password TEXT
 );
 ```
 

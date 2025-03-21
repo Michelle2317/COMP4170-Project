@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+	<body>
+		<h1>Register an account for your diary!</h1>
+		<form action="/register" method="POST">
+			<label for="username_id">Username</label>
+			<input
+				type="text"
+				id="username_id"
+				name="user_username"
+				placeholder="Enter your username"
+				required
+			/>
+
+			<label for="password_id">Password</label>
+			<input type="password" id="password_id" name="user_password" placeholder="Enter your password" required>
+			<button type="submit" class="button">Register</button>
+		</form>
+	</body>
+</html>

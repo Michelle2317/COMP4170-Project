@@ -1,24 +1,7 @@
 <%- include('../partials/header') %>
 	<body>
-		<h1>Login</h1>
-		<form action="/login" method="POST">
-			<label for="username_id">Username</label>
-			<input
-				type="text"
-				id="username_id"
-				name="username_name"
-				placeholder="Enter your username"
-				required
-			/>
-			<label for="email_id">Email</label>
-			<input
-				type="email"
-				id="email_id"
-				name="email_name"
-				placeholder="Enter your email"
-				required
-			/>
-			<button type="submit" class="button">Login</button>
-		</form>
+		<h1>Log In or Register to write in your diary!</h1>
+		<a class="button" href="/login" role="button">Login</a>
+		<a class="button" href="/register" role="button">Register</a>
 	</body>
 </html>

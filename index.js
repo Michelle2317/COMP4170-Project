@@ -15,7 +15,7 @@ const db = new pg.Client({
 	user: "postgres",
 	host: "localhost",
 	database: "diary",
-	password: "password",
+	password: "julia",
 	port: 5432
 });
 db.connect();
@@ -23,16 +23,72 @@ db.connect();
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-	res.render("index", { title: "Login" });
+	res.render("index.ejs", { title: "Home" });
 });
 
-app.post("/login", (req, res) => {
-	let username = req.body["username_name"];
-	let email = req.body["email_name"];
-	const query = "INSERT INTO users (username, email) VALUES ($1, $2)";
-	db.query(query, [username, email], (err, result) => {
-		res.render("dashboard", { title: "Dashboard", username });
-	});
+app.get("/register", (req, res) => {
+	res.render("register.ejs", { title: "Register" });
+});
+
+app.post("/register", async (req, res) => {
+	const username = req.body.user_username;
+	const password = req.body.user_password;
+
+	try {
+		const checkResult = await db.query(
+			"SELECT * FROM users WHERE username = $1",
+			[username]
+		);
+
+		if (checkResult.rows.length > 0) {
+			res.send("Account already exists. Try logging in to your account");
+		} else {
+			const result = await db.query(
+				"INSERT INTO users (username, password) VALUES ($1, $2)",
+				[username, password]
+			);
+			console.log(result);
+			res.render("dashboard.ejs", {
+				title: "Dashboard",
+				username
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+app.get("/login", (req, res) => {
+	res.render("login.ejs", { title: "Login" });
+});
+
+app.post("/login", async (req, res) => {
+	const username = req.body.user_username;
+	const password = req.body.user_password;
+
+	try {
+		const result = await db.query(
+			"SELECT * FROM users WHERE username = $1",
+			[username]
+		);
+		if (result.rows.length > 0) {
+			const user = result.rows[0];
+			const storedPassword = user.password;
+
+			if (password === storedPassword) {
+				res.render("dashboard.ejs", {
+					title: "Dashboard",
+					username
+				});
+			} else {
+				res.send("Incorrect password");
+			}
+		} else {
+			res.send("User not found");
+		}
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 app.get("/dashboard", (req, res) => {
