@@ -11,24 +11,24 @@
 			</button>
 		</div>
 		<ul>
-			<a href="/view">
+			<% if (entries && entries.length > 0) { %> <%
+			entries.forEach(entry => { %>
+			<a href="/view?entryId=<%= entry.id %>">
 				<li>
 					<div>
-						<h2>Entry 1 title</h2>
-						<p>March 22, 2025 Entry 1 date</p>
+						<h2><%= entry.title %></h2>
+						<p>
+							<%= new
+							Date(entry.created_at).toLocaleDateString()
+							%>
+						</p>
 					</div>
 					<%- include('../partials/editIcons') %>
 				</li>
 			</a>
-			<a href="/view">
-				<li>
-					<div>
-						<h2>Entry 2 title</h2>
-						<p>April 03, 2025 Entry 2 date</p>
-					</div>
-					<%- include('../partials/editIcons') %>
-				</li>
-			</a>
+			<% }) %> <% } else { %>
+			<p>No entries available.</p>
+			<% } %>
 		</ul>
 	</div>
 </body>

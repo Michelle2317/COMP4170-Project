@@ -12,7 +12,8 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-// normally, this would be stored in a .env file, but for the simplicity we will be sharing it here
+/* normally, this would be stored in a .env file, but for the simplicity we will be sharing it here
+ Session middleware to track user sessions */
 app.use(
 	session({
 		secret: 'deardiary',
@@ -89,10 +90,7 @@ app.post('/login', async (req, res) => {
 			if (password === storedPassword) {
 				req.session.userId = user.id;
 				req.session.username = user.username;
-				res.render('dashboard.ejs', {
-					title: 'Dashboard',
-					username: req.session.username,
-				});
+				res.redirect('/dashboard');
 			} else {
 				res.send('Incorrect password');
 			}
@@ -101,14 +99,35 @@ app.post('/login', async (req, res) => {
 		}
 	} catch (err) {
 		console.log(err);
+		res.status(500).send('Error during login');
 	}
 });
 
-app.get('/dashboard', (req, res) => {
-	res.render('dashboard', {
-		title: 'Dashboard',
-		username: req.session.username,
-	});
+app.get('/dashboard', async (req, res) => {
+	const userId = req.session.userId; //get logged-in user's id from the session
+
+	if (!userId) {
+		return res.redirect('/login');
+	}
+
+	try {
+		// Query the database to get all diary entries for the logged-in user, ordered by creation date
+		const result = await db.query(
+			'SELECT * FROM diaries WHERE user_id = $1 ORDER BY created_at DESC',
+			[userId]
+		);
+
+		const entries = result.rows; // Store the retrieved entries
+
+		res.render('dashboard', {
+			title: 'Dashboard',
+			username: req.session.username,
+			entries: entries,
+		});
+	} catch (err) {
+		console.error('Error fetching diary entries:', err);
+		res.status(500).send('Error fetching diary entries');
+	}
 });
 
 app.get('/create', (req, res) => {
@@ -116,17 +135,19 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/create', async (req, res) => {
-	const { entry_title, entry_content } = req.body;
-	const userId = req.session.userId;
+	const { entry_title, entry_content } = req.body; // Get title and content from request body
+	const userId = req.session.userId; // Get the logged-in user's id from the session
 
 	try {
+		// Insert the new diary entry into the database and return the created entry id
 		const result = await db.query(
 			'INSERT INTO diaries (user_id, title, content) VALUES ($1, $2, $3) RETURNING id',
 			[userId, entry_title, entry_content]
 		);
 
-		const entryId = result.rows[0].id;
+		const entryId = result.rows[0].id; // Get the newly created entry id
 
+		// after creating, redirect to the view page to see the new entry
 		res.redirect(`/view?entryId=${entryId}`);
 	} catch (err) {
 		console.log(err);
@@ -135,10 +156,15 @@ app.post('/create', async (req, res) => {
 });
 
 app.get('/view', async (req, res) => {
-	const entryId = req.query.entryId;
-	const userId = req.session.userId;
+	const entryId = req.query.entryId; // Get the entry id from query parameters
+	const userId = req.session.userId; // Get the logged-in user's id from the session
+
+	if (!userId) {
+		return res.redirect('/login');
+	}
 
 	try {
+		// Query the diaries database to find the specific diary entry for the logged-in user
 		const result = await db.query(
 			'SELECT * FROM diaries WHERE id = $1 AND user_id = $2',
 			[entryId, userId]
@@ -148,25 +174,18 @@ app.get('/view', async (req, res) => {
 			return res.status(404).send('Entry not found');
 		}
 
-		const entry = result.rows[0];
+		const entry = result.rows[0]; // Get the diary entry data
 
+		// Render the view entry page, passing the entry data to this view
 		res.render('view.ejs', {
 			title: 'View Entry',
 			entryTitle: entry.title,
 			entryContent: entry.content,
 		});
 	} catch (err) {
-		console.log(err);
+		console.log('Error fetching entry:', err);
 		res.status(500).send('Error fetching diary entry');
 	}
-});
-
-app.get('/edit', (req, res) => {
-	res.render('edit', { title: 'Edit Diary' });
-});
-
-app.get('/delete', (req, res) => {
-	res.render('delete', { title: 'Delete Diary' });
 });
 
 app.listen(3000, () => {
