@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"ejs": "^3.1.10",
+		"express-session": "^1.18.1",
 		"pg": "^8.14.0"
 	}
 }
