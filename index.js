@@ -15,7 +15,7 @@ const db = new pg.Client({
 	user: "postgres",
 	host: "localhost",
 	database: "diary",
-	password: "julia",
+	password: "password",
 	port: 5432
 });
 db.connect();
@@ -47,7 +47,6 @@ app.post("/register", async (req, res) => {
 				"INSERT INTO users (username, password) VALUES ($1, $2)",
 				[username, password]
 			);
-			console.log(result);
 			res.render("dashboard.ejs", {
 				title: "Dashboard",
 				username

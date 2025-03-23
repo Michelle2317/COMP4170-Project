@@ -1,16 +1,34 @@
 <%- include('../partials/header') %>
 <body>
-	<h1>Dashboard</h1>
-	<h1>Hello, <%= username %></h1>
-	<ul>
-		<li>
-			<h3>Entry 1 title</h3>
-			<p>Entry 1 date</p>
-		</li>
-		<li>
-			<h3>Entry 2 title</h3>
-			<p>Entry 2 date</p>
-		</li>
-	</ul>
-	<a href="/create">+ Add Entry</a>
+	<div class="dashboard">
+		<header>
+			<h1>Dashboard</h1>
+		</header>
+		<div class="dashboard-intro">
+			<h1>Hello, <%= username %></h1>
+			<button class="button">
+				<a href="/create">+ Add New Entry</a>
+			</button>
+		</div>
+		<ul>
+			<a href="/view">
+				<li>
+					<div>
+						<h2>Entry 1 title</h2>
+						<p>March 22, 2025 Entry 1 date</p>
+					</div>
+					<%- include('../partials/editIcons') %>
+				</li>
+			</a>
+			<a href="/view">
+				<li>
+					<div>
+						<h2>Entry 2 title</h2>
+						<p>April 03, 2025 Entry 2 date</p>
+					</div>
+					<%- include('../partials/editIcons') %>
+				</li>
+			</a>
+		</ul>
+	</div>
 </body>
