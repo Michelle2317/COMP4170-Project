@@ -248,6 +248,65 @@ app.post('/edit', async (req, res) => {
 	}
 });
 
+app.get('/delete', async (req, res) => {
+	const entryId = req.query.entryId; // Get the entryId from the query parameter
+	const userId = req.session.userId; // Get the userId from the session
+
+	try {
+		// Query the diaries database to find the specific diary entry for the logged-in user
+		const result = await db.query(
+			'SELECT * FROM diaries WHERE id = $1 AND user_id = $2',
+			[entryId, userId]
+		);
+
+		// If no matching entry is found, send a 404 error
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.send('Entry not found or unauthorized');
+		}
+
+		// Get the entry data from the result
+		const entry = result.rows[0];
+
+		// Render the delete confirmation page with the entry title and id
+		res.render('delete.ejs', {
+			title: 'Delete Entry',
+			entryTitle: entry.title,
+			entryId: entry.id,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).send('Error fetching diary entry');
+	}
+});
+
+app.post('/delete', async (req, res) => {
+	const entryId = req.body.entryId; // Get the entryId from the form
+	const userId = req.session.userId; // Get the logged-in user's id from the session
+
+	try {
+		// Delete the diary entry from the database
+		const result = await db.query(
+			'DELETE FROM diaries WHERE id = $1 AND user_id = $2 RETURNING *',
+			[entryId, userId]
+		);
+
+		// If no matching entry is found, send a 404 error
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.send('Entry not found or unauthorized');
+		}
+
+		// Redirect to the dashboard after deleting the entry
+		res.redirect('/dashboard');
+	} catch (err) {
+		console.error('Error deleting entry:', err);
+		res.status(500).send('Error deleting diary entry');
+	}
+});
+
 app.listen(3000, () => {
 	console.log(`App listening at port 3000`);
 });
