@@ -14,6 +14,7 @@ This is a diary web application that allows users to create, update, view, and d
 -   Julia Deng
     -   Edit README Documentation
     -   Add Authentication for user
+    -   Basic css and formatting for index, login, register, dashboard, create, edit, and delete pages
 -   Andrew Turitsa
     -   Task
 
