@@ -1,8 +1,8 @@
 <div>
-	<a href="/edit" class="icon"
-		><img src="images/edit.svg" alt="Edit icon"
-	/></a>
-	<a href="/delete" class="icon"
-		><img src="images/delete.svg" alt="Delete icon"
-	/></a>
+	<a href="/edit?entryId=<%= entry.id %>" class="icon">
+		<img src="/images/edit.svg" alt="Edit icon" />
+	</a>
+	<a href="/delete?entryId=<%= entry.id %>" class="icon">
+		<img src="/images/delete.svg" alt="Delete icon" />
+	</a>
 </div>

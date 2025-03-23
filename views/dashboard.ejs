@@ -23,11 +23,15 @@
 							%>
 						</p>
 					</div>
-					<%- include('../partials/editIcons') %>
+					<%- include('../partials/editIcons', {
+					entry: entry }) %>
 				</li>
 			</a>
 			<% }) %> <% } else { %>
-			<p>No entries available.</p>
+			<p>
+				No entries available. Start by creating a new
+				one!
+			</p>
 			<% } %>
 		</ul>
 	</div>

@@ -125,7 +125,7 @@ app.get('/dashboard', async (req, res) => {
 			entries: entries,
 		});
 	} catch (err) {
-		console.error('Error fetching diary entries:', err);
+		console.log(err);
 		res.status(500).send('Error fetching diary entries');
 	}
 });
@@ -170,6 +170,7 @@ app.get('/view', async (req, res) => {
 			[entryId, userId]
 		);
 
+		// If no matching entry is found, send a 404 error
 		if (result.rows.length === 0) {
 			return res.status(404).send('Entry not found');
 		}
@@ -179,12 +180,71 @@ app.get('/view', async (req, res) => {
 		// Render the view entry page, passing the entry data to this view
 		res.render('view.ejs', {
 			title: 'View Entry',
+			entry: entry,
 			entryTitle: entry.title,
 			entryContent: entry.content,
 		});
 	} catch (err) {
-		console.log('Error fetching entry:', err);
+		console.log(err);
 		res.status(500).send('Error fetching diary entry');
+	}
+});
+
+// Get the edit page with the current diary entry data
+app.get('/edit', async (req, res) => {
+	const entryId = req.query.entryId; // Retrieve the entryId from the query parameters
+	const userId = req.session.userId; // Get the logged-in user's id from the session
+
+	try {
+		// Query the diaries database to find the specific diary entry for the logged-in user
+		const result = await db.query(
+			'SELECT * FROM diaries WHERE id = $1 AND user_id = $2',
+			[entryId, userId]
+		);
+
+		// If no matching entry is found, send a 404 error
+		if (result.rows.length === 0) {
+			return res.status(404).send('Entry not found');
+		}
+
+		const entry = result.rows[0]; // Get the diary entry data from the result
+
+		// Render the edit page and pass the entry data to the view page
+		res.render('edit.ejs', {
+			title: 'Edit Entry',
+			entryId: entry.id,
+			entryTitle: entry.title,
+			entryContent: entry.content,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).send('Error fetching diary entry');
+	}
+});
+
+// Handle the form submission to update the diary entry
+app.post('/edit', async (req, res) => {
+	const { entryId, entry_title, entry_content } = req.body; // Get the new title and content from the form data
+	const userId = req.session.userId; // Get the logged-in user's id from the session
+
+	try {
+		// Update the diary entry in the database with the new title and content
+		const result = await db.query(
+			'UPDATE diaries SET title = $1, content = $2 WHERE id = $3 AND user_id = $4 RETURNING *',
+			[entry_title, entry_content, entryId, userId]
+		);
+
+		if (result.rows.length === 0) {
+			return res
+				.status(404)
+				.send('Entry not found or unauthorized');
+		}
+
+		// Redirect to the view page to show the updated diary entry
+		res.redirect(`/view?entryId=${entryId}`);
+	} catch (err) {
+		console.error('Error updating entry:', err);
+		res.status(500).send('Error updating diary entry');
 	}
 });
 
