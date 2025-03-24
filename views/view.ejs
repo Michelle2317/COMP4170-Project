@@ -1,8 +1,9 @@
-<%- include('../partials/header') %> <%- include('../partials/editIcons', {
-entry: entry }) %>
-
 <body>
-	<h1><%= entryTitle %></h1>
+	<header>
+		<h1><%= entryTitle %></h1>
+	</header>
+	<%- include('../partials/header') %> <%- include('../partials/editIcons', {
+	entry: entry }) %>
 	<div class="diary-content">
 		<p><%= entryContent %></p>
 	</div>
