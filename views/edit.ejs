@@ -4,22 +4,20 @@
 		<h1>Edit Entry</h1>
 	</header>
 	<form action="/edit" method="POST">
-		<input type="hidden" name="entryId" value="<%= entryId %>" />
-		<label for="entry_title">Title</label>
-		<input
-			type="text"
-			name="entry_title"
-			value="<%= entryTitle %>"
-			required
-		/>
+		<div class="form-group">
+			<input type="hidden" name="entryId" value="<%= entryId %>" />
+			<label for="entry_title">Title</label>
+			<input
+				type="text"
+				name="entry_title"
+				value="<%= entryTitle %>"
+				required
+			/>
+		</div>
 		<div class="form-group">
 			<label class="content">Content</label>
-			<textarea
-				id="entry_content"
-				name="entry_content"
-				required
-			>
-				<%= entryContent %></textarea
+			<textarea id="entry_content" name="entry_content" required>
+<%= entryContent %></textarea
 			>
 		</div>
 		<button class="button" type="submit">Save Entry</button>
