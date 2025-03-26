@@ -8,6 +8,11 @@
 	</div>
 	<div class="delete-buttons"> 
 		<form action="/delete" method="POST">
+			<input
+                type="hidden"
+                name="entryId"
+                value="<%= entryId %>"
+            />
 			<button type="submit" class="button-noback">Yes</button>
 		</form>
 		<button class="button">
