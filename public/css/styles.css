@@ -18,6 +18,10 @@ html {
 	max-height: fit-content;
 }
 
+/* .back-button {
+    margin-top: 30vh; 	
+} */
+
 .button:hover {
 	background-color: cornsilk;
 	box-shadow: inset 0px 0px 0px 3px tan;
@@ -27,6 +31,36 @@ html {
 .button:active {
 	background-color: tan;
 }
+
+
+.button-noback{
+	/* background-color: wheat; */
+	color: black;
+	background-color: white;
+	border: none;
+	padding: 1em 2em;
+	border-radius: 1em;
+	text-align: center;
+	font-weight: bold;
+	max-height: fit-content;
+}
+
+.button-noback:hover{
+	/* background-color: wheat; */
+	background-color: cornsilk;
+}
+
+
+
+.diary-content {
+    border: 2px solid black; 
+    padding: 1em; 
+    border-radius: 8px; 
+    margin-top: 20px; 
+}
+
+
+
 
 a {
 	text-decoration: none;
@@ -123,12 +157,48 @@ header {
 	margin: 0;
 }
 
+
+.dashboard-btn-container {
+    display: flex;
+    justify-content: space-between; /* Pushes elements to edges */
+    align-items: center; /* Aligns items vertically */
+    margin-bottom: 20px; /* Creates space below */
+}
+
+
 .icon:hover {
 	background-color: plum;
 	padding-top: 0.7em;
 	border-radius: 0.5em;
 }
+.icon img {
+    width: 40px;
+    height: 40px ;
+    display: block;
+}
+
 
 .delete-h1 {
 	text-align: center;
 }
+
+
+
+
+
+.icon-container {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: flex-end;
+	position: relative;
+}
+
+
+.delete-buttons, .edit-buttons {
+	display: flex;
+	gap: 10px;
+	top: -20px;
+	justify-content: center;
+}
+

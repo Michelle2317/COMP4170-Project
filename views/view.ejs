@@ -2,12 +2,16 @@
 	<header>
 		<h1><%= entryTitle %></h1>
 	</header>
+	<div class="dashboard-btn-container">
+	<button class="button back-button">
+		<a href="/dashboard">Back to Dashboard</a>
+	</button>
 	<%- include('../partials/header') %> <%- include('../partials/editIcons', {
-	entry: entry }) %>
+		entry: entry }) %>
+	</div>
+
 	<div class="diary-content">
 		<p><%= entryContent %></p>
 	</div>
-	<button class="button">
-		<a href="/dashboard">Back to Dashboard</a>
-	</button>
+
 </body>
