@@ -1,6 +1,6 @@
 html {
-	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	margin: 1em 10em;
 	display: flex;
 	justify-content: center;
@@ -18,10 +18,6 @@ html {
 	max-height: fit-content;
 }
 
-/* .back-button {
-    margin-top: 30vh; 	
-} */
-
 .button:hover {
 	background-color: cornsilk;
 	box-shadow: inset 0px 0px 0px 3px tan;
@@ -32,34 +28,27 @@ html {
 	background-color: tan;
 }
 
-
-.button-noback{
+.button-noback {
 	color: black;
 	background-color: white;
-	border: none;
-	padding: 1em 2em;
+	padding: 0.85em 2em;
 	border-radius: 1em;
 	text-align: center;
 	font-weight: bold;
 	max-height: fit-content;
-	outline: 2px solid rgba(0, 0, 0, 0.5)
+	border: 3px solid rgba(0, 0, 0, 0.5);
 }
 
-.button-noback:hover{
+.button-noback:hover {
 	background-color: cornsilk;
 }
 
-
-
 .diary-content {
-    border: 2px solid black; 
-    padding: 1em; 
-    border-radius: 8px; 
-    margin-top: 20px; 
+	border: 2px solid black;
+	padding: 1em;
+	border-radius: 8px;
+	margin-top: 20px;
 }
-
-
-
 
 a {
 	text-decoration: none;
@@ -156,33 +145,27 @@ header {
 	margin: 0;
 }
 
-
 .dashboard-btn-container {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 20px; 
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
 }
-
 
 .icon:hover {
 	background-color: plum;
 	border-radius: 0.5em;
 }
-.icon img {
-    width: 30px;
-    height: 30px ;
-    display: block;
-}
 
+.icon img {
+	width: 30px;
+	height: 30px;
+	display: block;
+}
 
 .delete-h1 {
 	text-align: center;
 }
-
-
-
-
 
 .icon-container {
 	display: flex;
@@ -192,11 +175,16 @@ header {
 	position: relative;
 }
 
-
-.delete-buttons, .edit-buttons {
+.delete-buttons,
+.edit-buttons {
 	display: flex;
 	gap: 10px;
 	top: -20px;
 	justify-content: center;
 }
 
+.action-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
