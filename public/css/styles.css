@@ -1,134 +1,158 @@
 html {
-	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-	margin: 1em 10em;
-	display: flex;
-	justify-content: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 1em 10em;
+    display: flex;
+    justify-content: center;
 }
 
-/*Button styles*/
+/* Button styles */
 .button {
-	background-color: wheat;
-	color: black;
-	border: none;
-	padding: 1em 2em;
-	border-radius: 1em;
-	text-align: center;
-	font-weight: bold;
-	max-height: fit-content;
+    background-color: wheat;
+    color: black;
+    border: none;
+    padding: 1em 2em;
+    border-radius: 1em;
+    text-align: center;
+    font-weight: bold;
+    max-height: fit-content;
 }
 
 .button:hover {
-	background-color: cornsilk;
-	box-shadow: inset 0px 0px 0px 3px tan;
-	cursor: pointer;
+    background-color: cornsilk;
+    box-shadow: inset 0px 0px 0px 3px tan;
+    cursor: pointer;
 }
 
 .button:active {
-	background-color: tan;
+    background-color: tan;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 a:visited {
-	color: black;
+    color: black;
 }
 
-/*Input Forms*/
+/* Input Forms */
 .start-container {
-	background-color: mediumpurple;
-	color: white;
-	border-radius: 1em;
-	padding: 3em;
-	margin-top: 5em;
-	text-align: center;
+    background-color: mediumpurple;
+    color: white;
+    border-radius: 1em;
+    padding: 3em;
+    margin-top: 5em;
+    text-align: center;
 }
 
-.home-buttons,
-.delete-buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 1em;
-}
-
+/* Spacing between elements in forms */
 .form-group {
-	display: flex;
-	flex-direction: column;
-	text-align: left;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 35px; /* Increased spacing */
+}
+
+/* Keep labels close to their respective input fields */
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .form-group input,
 textarea {
-	border-radius: 1em;
-	padding: 1em;
-	border-color: blueviolet;
-	margin-bottom: 1em;
+    border-radius: 1em;
+    padding: 1em;
+    border-color: blueviolet;
 }
 
-.form-group label {
-	margin-bottom: 0.2em;
-	font-weight: bold;
+/* Ensure spacing for form buttons */
+.start-container form button {
+    margin-top: 35px;
 }
 
-/*Header*/
+/* Ensure heading spacing */
+.start-container h1 {
+    margin-bottom: 35px;
+}
+
+/* Login/Register Button Spacing */
+.home-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 35px; /* Ensures correct vertical positioning */
+}
+
+/* Header */
 header {
-	background-color: mediumpurple;
-	color: white;
-	border-radius: 1em;
-	padding: 1em 2em;
-	margin-top: 5em;
-	margin-bottom: 1em;
-	text-align: center;
-	min-width: 60vw;
+    background-color: mediumpurple;
+    color: white;
+    border-radius: 1em;
+    padding: 1em 2em;
+    margin-top: 5em;
+    margin-bottom: 1em;
+    text-align: center;
+    min-width: 60vw;
 }
 
-/*Dashboard*/
+/* Dashboard */
 .dashboard-intro {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
 }
 
 .dashboard ul {
-	padding-left: 0;
+    padding-left: 0;
 }
 
 .dashboard li {
-	list-style-type: none;
-	/* background-color: lightgray; */
-	padding: 0.5em 1em;
-	border: 1.5px solid blueviolet;
-	margin-bottom: 0.5em;
-	border-radius: 0.5em;
+    list-style-type: none;
+    padding: 0.5em 1em;
+    border: 1.5px solid blueviolet;
+    margin-bottom: 20px; /* Increased spacing */
+    border-radius: 0.5em;
 }
 
 .dashboard li:hover {
-	background-color: lavender;
-	cursor: pointer;
+    background-color: lavender;
+    cursor: pointer;
 }
 
 .dashboard li:active {
-	background-color: #cbc3e3;
+    background-color: #cbc3e3;
 }
 
 .dashboard h2 {
-	margin: 0;
+    margin: 0;
 }
 
 .dashboard p {
-	margin: 0;
+    margin: 0;
+}
+
+/* Spacing between edit/delete icons */
+.icon {
+    margin-left: 15px;
 }
 
 .icon:hover {
-	background-color: plum;
-	padding-top: 0.7em;
-	border-radius: 0.5em;
+    background-color: plum;
+    padding-top: 0.7em;
+    border-radius: 0.5em;
 }
 
+/* Delete Page */
 .delete-h1 {
-	text-align: center;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.delete-buttons {
+    margin-top: 35px;
 }
