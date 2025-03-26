@@ -11,25 +11,23 @@
 			</button>
 		</div>
 		<ul>
-			<ul>
-				<% if (entries && entries.length > 0) { %> 
-					<% entries.forEach(entry => { %>
-						<a href="/view?entryId=<%= entry.id %>">
-							<li>
-								<div class="action-container" style="display: flex; justify-content: space-between; align-items: center;">
-									<h2 style="margin: 0;"><%= entry.title %></h2>
-									<div class="icon-container">
-										<%- include('../partials/editIcons', { entry: entry }) %>
-									</div>
+			<% if (entries && entries.length > 0) { %> 
+				<% entries.forEach(entry => { %>
+					<a href="/view?entryId=<%= entry.id %>">
+						<li>
+							<div class="action-container" style="display: flex; justify-content: space-between; align-items: center;">
+								<h2 style="margin: 0;"><%= entry.title %></h2>
+								<div class="icon-container">
+									<%- include('../partials/editIcons', { entry: entry }) %>
 								</div>
-								<p><%= new Date(entry.created_at).toLocaleDateString() %></p>
-							</li>
-						</a>
-					<% }) %> 
-				<% } else { %>
-					<p>No entries available. Start by creating a new one!</p>
-				<% } %>
-			</ul>
-		</ul>
+							</div>
+							<p><%= new Date(entry.created_at).toLocaleDateString() %></p>
+						</li>
+					</a>
+				<% }) %> 
+			<% } else { %>
+				<p>No entries available. Start by creating a new one!</p>
+			<% } %>
+	</ul>
 	</div>
 </body>
