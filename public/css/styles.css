@@ -34,7 +34,6 @@ html {
 
 
 .button-noback{
-	/* background-color: wheat; */
 	color: black;
 	background-color: white;
 	border: none;
@@ -43,10 +42,10 @@ html {
 	text-align: center;
 	font-weight: bold;
 	max-height: fit-content;
+	outline: 2px solid rgba(0, 0, 0, 0.5)
 }
 
 .button-noback:hover{
-	/* background-color: wheat; */
 	background-color: cornsilk;
 }
 
