@@ -57,16 +57,16 @@ app.post('/register', async (req, res) => {
 			);
 		} else {
 			const result = await db.query(
-				'INSERT INTO users (username, password) VALUES ($1, $2)',
+				'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
 				[username, password]
 			);
-			res.render('dashboard.ejs', {
-				title: 'Dashboard',
-				username,
-			});
+			req.session.userId = result.rows[0].id;
+			req.session.username = username;
+			res.redirect('/dashboard');
 		}
 	} catch (err) {
 		console.log(err);
+		res.status(500).send('Error registering user');
 	}
 });
 
