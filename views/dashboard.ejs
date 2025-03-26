@@ -1,31 +1,38 @@
 <%- include('../partials/header') %>
-<main>
-    <div class="dashboard">
-        <header>
-            <h1>Dashboard</h1>
-        </header>
-        <div class="dashboard-intro">
-            <h1>Hello, <%= username %></h1>
-            <button class="button">
-                <a href="/create">+ Add New Entry</a>
-            </button>
-        </div>
-        <ul>
-            <% if (entries && entries.length > 0) { %>
-                <% entries.forEach(entry => { %>
-                    <a href="/view?entryId=<%= entry.id %>">
-                        <li>
-                            <div>
-                                <h2><%= entry.title %></h2>
-                                <p><%= new Date(entry.created_at).toLocaleDateString() %></p>
-                            </div>
-                            <%- include('../partials/editIcons', { entry: entry }) %>
-                        </li>
-                    </a>
-                <% }) %>
-            <% } else { %>
-                <p>No entries available. Start by creating a new one!</p>
-            <% } %>
-        </ul>
-    </div>
-</main>
+<body>
+	<div class="dashboard">
+		<header>
+			<h1>Dashboard</h1>
+		</header>
+		<div class="dashboard-intro">
+			<h1>Hello, <%= username %></h1>
+			<button class="button">
+				<a href="/create">+ Add New Entry</a>
+			</button>
+		</div>
+		<ul>
+			<% if (entries && entries.length > 0) { %> <%
+			entries.forEach(entry => { %>
+			<a href="/view?entryId=<%= entry.id %>">
+				<li>
+					<div>
+						<h2><%= entry.title %></h2>
+						<p>
+							<%= new
+							Date(entry.created_at).toLocaleDateString()
+							%>
+						</p>
+					</div>
+					<%- include('../partials/editIcons', {
+					entry: entry }) %>
+				</li>
+			</a>
+			<% }) %> <% } else { %>
+			<p>
+				No entries available. Start by creating a new
+				one!
+			</p>
+			<% } %>
+		</ul>
+	</div>
+</body>
